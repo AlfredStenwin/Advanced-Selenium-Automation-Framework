@@ -35,7 +35,7 @@ public class BaseTest {
 	@BeforeTest
 	public void testInit(String browser) throws Exception {
 		
-		
+		//
 		driver = new DriverLogger(new DriverBase());	
 		LogUtility.info("Driver set up Successfull." +Thread.currentThread().getId());
 		
