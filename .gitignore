@@ -1,8 +1,7 @@
 /target/
+.metadata
 .project
 .classpath
 /.settings/
 /test-output/
-/Screenshots/
-/ExtentReports/
 Readme.txt
