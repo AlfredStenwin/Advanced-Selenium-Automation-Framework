@@ -3,8 +3,6 @@ package listeners;
 import java.io.File;
 import java.io.IOException;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.io.FileHandler;
 import org.testng.ISuite;
 import org.testng.ISuiteListener;
@@ -17,28 +15,24 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 
 import decorators.Driver;
-import logsetup.LogUtility;
+import logsetup.Log;
 
 public class TestngListener implements ITestListener, ISuiteListener{
 	ExtentReports extentReport;
 	ExtentTest extentTest ;
-	
-	//protected LogUtility log = LogUtility.getInstance();
-	private static Logger log = LogManager.getLogger("LOG");
-
 
 	@Override
 	public void onStart(ISuite suite) {
 		//To generate extend report at the start of the suite execution
 		extentReport=ExtentReportGenerator.generateReport();	
-		LogUtility.info("\""+suite.getName()+ "\" test suite execution started.");
+		Log.info("\""+suite.getName()+ "\" test suite execution started.");
 	}
 
 	@Override
 	public void onFinish(ISuite suite) {
 		//Flush is used to create the extend report
 		extentReport.flush();		
-		LogUtility.info("\""+suite.getName()+ "\" test suite execution ended.");				
+		Log.info("\""+suite.getName()+ "\" test suite execution ended.");				
 	}
 	
 	@Override
@@ -51,7 +45,7 @@ public class TestngListener implements ITestListener, ISuiteListener{
 		String testName=result.getName();
 		extentTest = extentReport.createTest(testName);
 		extentTest.log(Status.INFO, testName+" started." );
-		log.info("\""+testName+"\" execution started. EntentTest created");
+		Log.info("\""+testName+"\" execution started. EntentTest created");
 
 	}
 
@@ -59,7 +53,7 @@ public class TestngListener implements ITestListener, ISuiteListener{
 	public void onTestSuccess(ITestResult result) {
 		String testName=result.getName();
 		extentTest.log(Status.PASS, testName+" test passed." );
-		log.info("\""+testName+"\" passed.");		
+		Log.info("\""+testName+"\" passed.");		
 		
 	}
 
@@ -84,16 +78,15 @@ public class TestngListener implements ITestListener, ISuiteListener{
 			e.printStackTrace();
 		}
 		
-		var thrower= result.getThrowable();
 		extentTest.log(Status.FAIL, testName +" failed. \n"+result.getThrowable());
-		log.error("\""+result.getName()+"\" failed.", result.getThrowable());
+		Log.error("\""+result.getName()+"\" failed.", result.getThrowable());
 	}
 
 	@Override
 	public void onTestSkipped(ITestResult result) {
 		String testName=result.getName();
 		extentTest.log(Status.SKIP, testName +" skipped." + result.getThrowable());		
-		log.error("\""+result.getName()+"\" skipped.", result.getThrowable());		
+		Log.error("\""+result.getName()+"\" skipped.", result.getThrowable());		
 	}
 
 	@Override
@@ -103,7 +96,7 @@ public class TestngListener implements ITestListener, ISuiteListener{
 
 	@Override
 	public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
-		log.info("onTestFailedButWithinSuccessPercentage");		
+		Log.info("onTestFailedButWithinSuccessPercentage");		
 		
 	}
 

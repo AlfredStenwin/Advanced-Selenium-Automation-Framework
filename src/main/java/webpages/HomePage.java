@@ -1,11 +1,12 @@
 package webpages;
 
 import decorators.Driver;
+import logsetup.Log;
 import webpages.pageelements.HomePageElements;
 import webpages.pagesections.MainMenuSection;
 
-public class HomePage extends BasePage{
-		
+public class HomePage extends BasePage{	
+	
 	public HomePage(Driver driver) {
 		super(driver);	
 	}		
@@ -15,10 +16,10 @@ public class HomePage extends BasePage{
 		return new HomePageElements(driver);
 	}
 	
-//	//composition
-//	public MainMenuSection mainMenuSection() {
-//		return new MainMenuSection(driver);
-//	}
+	//composition
+	public MainMenuSection mainMenuSection() {
+		return new MainMenuSection(driver);
+	}
 	
 	@Override
 	protected void waitForPageLoad() {		
@@ -27,7 +28,7 @@ public class HomePage extends BasePage{
 	//Methods
 	public HomePage gotoUrl(String url) {
 		driver.goToUrl(url);
-		log.info("Navigated to URL.");
+		Log.info("Navigated to URL.");
 		
 		return this;
 	}
@@ -39,7 +40,7 @@ public class HomePage extends BasePage{
 	
 	public UserRegistrationPage clickOnSignUpTab(){
 		driver.findElement(elements().getCreateAnAccountLink()).click();
-		log.info("Clicked on signup tab");
+		Log.info("Clicked on signup tab");
 
 		return new UserRegistrationPage(driver);
 	}			

@@ -2,7 +2,6 @@ package webpages.pageelements;
 
 import org.openqa.selenium.By;
 import decorators.Driver;
-import decorators.Element;
 
 
 public class HomePageElements {
@@ -16,7 +15,6 @@ public class HomePageElements {
 	private final By createAnAccountLink = By.xpath("//a[text()='Create an Account']");	
 
 	public By getCreateAnAccountLink() {
-		//return driver.findElements(CreateAnAccountLink).get(0);
 		return createAnAccountLink;
 	}
 	

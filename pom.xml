@@ -31,7 +31,7 @@
 		    <scope>compile</scope> <!-- changed from 'tests' to 'compile' to access the testng out of src/test folders and access anywhere -->
 		</dependency>
 			
-		<!-- Log4j dependencies-->
+		<!-- Log4j2 dependencies-->
 		<dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
@@ -43,6 +43,11 @@
             <artifactId>log4j-api</artifactId>
             <version>2.13.3</version>
         </dependency>
+		<dependency> 
+		    <groupId>org.apache.logging.log4j</groupId> 
+		    <artifactId>log4j-slf4j-impl</artifactId> 
+		    <version>2.13.3</version> 
+		</dependency>
 		
 		<!-- Extentreport dependency-->
 		<!-- https://mvnrepository.com/artifact/com.aventstack/extentreports -->

@@ -10,7 +10,7 @@ import decorators.DriverLogger;
 import enums.FileType;
 import filereaderfactory.FileReaders;
 import filereaderfactory.ReaderManager;
-import logsetup.LogUtility;
+import logsetup.Log;
 import webpages.HomePage;
 import webpages.MyAccountPage;
 import webpages.UserRegistrationPage;
@@ -19,6 +19,7 @@ import webpages.pagesections.MainMenuSection;
 public class BaseTest {
 	
 	public Driver driver;
+	//private Logger log = LogManager.getLogger(BaseTest.class);
 	
 	protected MyAccountPage myaccountsPage;
 	protected UserRegistrationPage userRegistrationPage;
@@ -29,7 +30,6 @@ public class BaseTest {
 			.readFile(System.getProperty("user.dir")+"/src/test/resources/Config.properties");
 	
 	final String url = configFile.get("url");
-
 	
 	@Parameters({"browser"})
 	@BeforeTest
@@ -37,14 +37,14 @@ public class BaseTest {
 		
 		//
 		driver = new DriverLogger(new DriverBase());	
-		LogUtility.info("Driver set up Successfull." +Thread.currentThread().getId());
+		Log.info("Driver set up Successfull." +Thread.currentThread().getId());
 		
 		homePage=new HomePage(driver);
 		myaccountsPage=new MyAccountPage(driver);
 		userRegistrationPage=new UserRegistrationPage(driver);
-		LogUtility.info("Trying to start browser: "+browser +Thread.currentThread().getId());
+		Log.info("Trying to start browser: "+browser +Thread.currentThread().getId());
 		driver.start(browser);
-		LogUtility.info("Broswer "+browser+" started" +Thread.currentThread().getId());	
+		Log.info("Broswer "+browser+" started" +Thread.currentThread().getId());	
 	}
 	
 	@AfterTest
@@ -52,7 +52,7 @@ public class BaseTest {
 		if (driver != null) {
 			driver.quit();
 		}
-		LogUtility.info("Driver quit successfully.");
+		Log.info("Driver quit successfully.");
 
 	}
 }

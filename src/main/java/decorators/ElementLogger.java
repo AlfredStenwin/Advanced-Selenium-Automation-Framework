@@ -2,11 +2,9 @@ package decorators;
 
 import org.openqa.selenium.By;
 
-import logsetup.LogUtility;
+import logsetup.Log;
 
 public class ElementLogger extends ElementDecorator {
-	//public static Logger log = LogManager.getLogger("LOG");
-	private LogUtility log = LogUtility.getInstance();
 
 	
 	protected ElementLogger(Element element) {
@@ -21,37 +19,37 @@ public class ElementLogger extends ElementDecorator {
     @Override
     public String getText() {
     	String elementName = element.getText();
-    	log.info(String.format("Element Text = %s", elementName));
+    	Log.info(String.format("Element Text = %s", elementName));
         return elementName;
     }
 
     @Override
     public Boolean isEnabled() {
-        log.info(String.format("Element Enabled = %b", element.isEnabled()));
+    	Log.info(String.format("Element Enabled = %b", element.isEnabled()));
         return element.isEnabled();
     }
 
     @Override
     public Boolean isDisplayed() {
-    	log.info((String.format("Element Displayed = %b", element.isDisplayed())));
+    	Log.info((String.format("Element Displayed = %b", element.isDisplayed())));
         return element.isDisplayed();
     }
 
     @Override
     public void typeText(String text){
-    	log.info((String.format("Type Text = %s", text)));
+    	Log.info((String.format("Type Text = %s", text)));
         element.typeText(text);
     }
 
     @Override
     public void click() {
         element.click();
-    	log.info("Element  Clicked");
+        Log.info("Element  Clicked");
     }
 
     @Override
     public String getAttribute(String attributeName) {
-    	log.info("Trying to get attribute");
+    	Log.info("Trying to get attribute");
         return element.getAttribute(attributeName);
     }
 }

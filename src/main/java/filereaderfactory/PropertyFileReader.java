@@ -3,10 +3,14 @@ package filereaderfactory;
 import java.io.FileReader;
 import java.util.Properties;
 
-import logsetup.LogUtility;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+//import logsetup.LogUtility;
 
 public class PropertyFileReader implements ReaderManager{
 	Properties props;
+	private static Logger LogUtility = LogManager.getLogger(PropertyFileReader.class);
 
 	public ReaderManager readFile(String filePath)
 	{	  
@@ -16,7 +20,7 @@ public class PropertyFileReader implements ReaderManager{
 			props.load(reader);
 			
 		} catch (Exception e) {	
-			LogUtility.getInstance().error("Property file couldn't be read.", e);
+			LogUtility.error("Property file couldn't be read.", e);
 		}
 		return this;
 		

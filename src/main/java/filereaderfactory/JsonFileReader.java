@@ -3,16 +3,22 @@ package filereaderfactory;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import logsetup.LogUtility;
+//import logsetup.LogUtility;
 
 /*Simple json reader - Will fail if used for nested json*/
 
 public class JsonFileReader implements ReaderManager{
 	HashMap<String, Object> map;
 	Object[] dataObject;
+	private static Logger LogUtility = LogManager.getLogger(JsonFileReader.class);
+
 
 	
 	public ReaderManager readFile(String filePath) {
@@ -24,7 +30,7 @@ public class JsonFileReader implements ReaderManager{
 
 		} catch (IOException e) {
 			
-			LogUtility.getInstance().error("Reading from json file failed.");
+			LogUtility.error("Reading from json file failed.");
 			e.printStackTrace();
 		}
 		
@@ -40,7 +46,6 @@ public class JsonFileReader implements ReaderManager{
 
 	@Override
 	public String get(String key) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 }
