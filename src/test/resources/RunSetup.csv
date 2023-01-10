@@ -1,0 +1,4 @@
+testcaseid,description,ifrunneeded
+tc01,Navigate to home page,true
+tc02,Navigate to user signup page,false
+tc03,Register new user,true

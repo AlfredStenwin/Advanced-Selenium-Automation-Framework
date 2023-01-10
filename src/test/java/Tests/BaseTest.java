@@ -7,10 +7,8 @@ import org.testng.annotations.Parameters;
 import decorators.Driver;
 import decorators.DriverBase;
 import decorators.DriverLogger;
-import enums.FileType;
-import filereaderfactory.FileReaders;
-import filereaderfactory.ReaderManager;
 import logsetup.Log;
+import utilities.filereaders.PropertyFileReader;
 import webpages.HomePage;
 import webpages.MyAccountPage;
 import webpages.UserRegistrationPage;
@@ -19,23 +17,21 @@ import webpages.pagesections.MainMenuSection;
 public class BaseTest {
 	
 	public Driver driver;
-	//private Logger log = LogManager.getLogger(BaseTest.class);
 	
 	protected MyAccountPage myaccountsPage;
 	protected UserRegistrationPage userRegistrationPage;
 	protected HomePage homePage;
 	protected MainMenuSection mainMenuSection;
 	
-	protected ReaderManager configFile = FileReaders.getFileReader(FileType.PROPERTY)
-			.readFile(System.getProperty("user.dir")+"/src/test/resources/Config.properties");
-	
-	final String url = configFile.get("url");
-	
+	String url = PropertyFileReader
+			.readFile(System.getProperty("user.dir")+"/src/test/resources/Config.properties")
+			.get("url")
+			.toString();
+			 	
 	@Parameters({"browser"})
 	@BeforeTest
 	public void testInit(String browser) throws Exception {
 		
-		//
 		driver = new DriverLogger(new DriverBase());	
 		Log.info("Driver set up Successfull." +Thread.currentThread().getId());
 		
