@@ -3,9 +3,7 @@ package decorators;
 import org.openqa.selenium.By;
 
 public class ElementDecorator implements Element {
-    protected final Element element;//composition - by containing
-    //instances of other classes that implement the desired functionality. 
-    //Element class in this case
+    protected final Element element;
 
     protected ElementDecorator(Element element) {
         this.element = element;
