@@ -10,6 +10,7 @@ import org.testng.IMethodInstance;
 import org.testng.IMethodInterceptor;
 import org.testng.ITestContext;
 
+import enums.TestCaseDetails;
 import globalconstants.GlobalConstants;
 import utilities.filereaders.CsvReaderUtility;
 
@@ -47,11 +48,11 @@ public class MethodInterceptor implements IMethodInterceptor{
 	private List<IMethodInstance> getListOfTestCasesToRun(List<IMethodInstance> methods, List<Map<String, String>> mapList){
 		for(var method : methods){
 			for(var map : mapList){
-				if(method.getMethod().getMethodName().equalsIgnoreCase(map.get("name"))) {
-					if(map.get("execute").equalsIgnoreCase("true")) {
-						method.getMethod().setDescription(map.get("description"));
-						testList.add(method);
-					}
+				if(method.getMethod().getMethodName().equalsIgnoreCase(map.get(TestCaseDetails.NAME.toString().toLowerCase())) &&
+						map.get(TestCaseDetails.EXECUTE.toString().toLowerCase()).equalsIgnoreCase("true")) {
+						
+					method.getMethod().setDescription(map.get(TestCaseDetails.DESCRIPTION.toString().toLowerCase()));
+					testList.add(method);
 				}
 			}
 		}
