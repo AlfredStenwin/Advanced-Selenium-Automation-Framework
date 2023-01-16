@@ -1,7 +1,9 @@
 package listeners;
 
+import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 import org.openqa.selenium.io.FileHandler;
 import org.testng.ISuite;
@@ -16,22 +18,23 @@ import com.aventstack.extentreports.Status;
 
 import decorators.Driver;
 import logsetup.Log;
+import reports.ExtentReport;
 
-public class TestngListener implements ITestListener, ISuiteListener{
+public class TestListener implements ITestListener, ISuiteListener{
 	ExtentReports extentReport;
 	ExtentTest extentTest ;
 
 	@Override
 	public void onStart(ISuite suite) {
 		//To generate extend report at the start of the suite execution
-		extentReport=ExtentReportGenerator.generateReport();	
+		extentReport=ExtentReport.initReport();	
 		Log.info("\""+suite.getName()+ "\" test suite execution started.");
 	}
 
 	@Override
 	public void onFinish(ISuite suite) {
 		//Flush is used to create the extend report
-		extentReport.flush();		
+		extentReport.flush();
 		Log.info("\""+suite.getName()+ "\" test suite execution ended.");				
 	}
 	
@@ -42,31 +45,31 @@ public class TestngListener implements ITestListener, ISuiteListener{
 	
 	@Override
 	public void onTestStart(ITestResult result) {
-		String testName=result.getName();
-		extentTest = extentReport.createTest(testName);
-		extentTest.log(Status.INFO, testName+" started." );
-		Log.info("\""+testName+"\" execution started. EntentTest created");
+		String testDesc=result.getMethod().getDescription();
+		extentTest = extentReport.createTest(testDesc);
+		extentTest.log(Status.INFO, testDesc+" started." );
+		Log.info("\""+testDesc+"\" execution started. EntentTest created");
 
 	}
 
 	@Override
 	public void onTestSuccess(ITestResult result) {
-		String testName=result.getName();
-		extentTest.log(Status.PASS, testName+" test passed." );
-		Log.info("\""+testName+"\" passed.");		
+		String testDesc=result.getMethod().getDescription();
+		extentTest.log(Status.PASS, testDesc+" test passed." );
+		Log.info("\""+testDesc+"\" passed.");		
 		
 	}
 
 	@Override
 	public void onTestFailure(ITestResult result) {
-		String testName=result.getName();
+		String testDesc=result.getMethod().getDescription();
 		
 		//Getting the driver from result parameter for taking the screenshot on failure of test
 		try {
 			Driver driver = (Driver)result.getTestClass().getRealClass().getField("driver").get(result.getInstance());
 			
 			//Take screenshot and copying to Screenshot folder in the project
-			String screenshotsFolderPath =System.getProperty("user.dir")+"/Screenshots/"+testName+".png";
+			String screenshotsFolderPath =System.getProperty("user.dir")+"/Screenshots/"+testDesc+".png";
 			
 			//Call takescreenshot() method from DriverLogger class and copying the screenshot from source path to Screenshot folder 	
 			FileHandler.copy(driver.takescreenshot(), new File(screenshotsFolderPath));
@@ -78,14 +81,16 @@ public class TestngListener implements ITestListener, ISuiteListener{
 			e.printStackTrace();
 		}
 		
-		extentTest.log(Status.FAIL, testName +" failed. \n"+result.getThrowable());
+		extentTest.log(Status.FAIL, testDesc +" failed.");
+		extentTest.fail(Arrays.toString(result.getThrowable().getStackTrace()));//beautify stacktrace		
 		Log.error("\""+result.getName()+"\" failed.", result.getThrowable());
 	}
 
 	@Override
 	public void onTestSkipped(ITestResult result) {
 		String testName=result.getName();
-		extentTest.log(Status.SKIP, testName +" skipped." + result.getThrowable());		
+		extentTest.log(Status.SKIP, testName +" skipped.");		
+		extentTest.skip(Arrays.toString(result.getThrowable().getStackTrace()));		
 		Log.error("\""+result.getName()+"\" skipped.", result.getThrowable());		
 	}
 

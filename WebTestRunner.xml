@@ -1,26 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite verbose="1" name="Demo test suite" parallel="false" thread-count="1"  >
+<suite name="Demo test suite" >
 
 	
 	<listeners>
-		<listener class-name="listeners.TestngListener" ></listener>
+		<listener class-name="listeners.TestListener" ></listener>
+		<listener class-name="listeners.MethodInterceptor" ></listener>
+
 	</listeners> 
 	
 	<parameter name = "browser" value = "chrome"></parameter> 
-	<test name="Navigate to home page">
+	<test name="Navigate to home page" parallel="tests" thread-count="1">
 
 		<classes>
-			<class name="Tests.NewUserRegistration"> 
-				<methods>
-				  <include name="navigateToHomepage"></include>
-				</methods>
-			</class>
+			<class name="Tests.NewUserRegistration"/> 
 		</classes>
 	</test>
-
+<!--
 	<parameter name = "browser" value = "chrome"></parameter> 
-	<test name="Navigate to user signup page">
+	<test name="Navigate to user signup page" parallel="tests" thread-count="1">
 			<classes>
 				<class name="Tests.NewUserRegistration"> 
 					<methods>
@@ -31,7 +29,7 @@
 	</test>
 
 	<parameter name = "browser" value = "chrome"></parameter> 
-	<test name="Register new user">	
+	<test name="Register new user" parallel="tests" thread-count="1">	
 			<classes>
 				<class name="Tests.NewUserRegistration"> 
 					<methods>
@@ -40,5 +38,5 @@
 				</class>
 			</classes>
 	</test>
-	
+	-->
 </suite> 
