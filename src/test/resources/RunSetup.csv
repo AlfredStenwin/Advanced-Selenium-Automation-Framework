@@ -2,3 +2,5 @@ testid,name,description,execute
 1,navigateToHomepage,Navigate to home page,true
 2,navigateToUserSignupPage,Navigate to user signup page,true
 3,registerNewUser,Register new user,true
+
+#name, description and execute header names should not be altered

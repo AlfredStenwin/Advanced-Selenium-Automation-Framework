@@ -11,6 +11,12 @@ import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 
+/*
+ * Simple csv reader using Jackson library to read mainly the RunSetup.csv file. Models are not used 
+ * to prevent frequent updating in the pojo class/models when the structure of the RunSetup file might 
+ * change according to the preferences of the test execution. 
+ * */
+
 public final class CsvReaderUtility  {
 	
 	private CsvReaderUtility() {}
