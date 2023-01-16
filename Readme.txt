@@ -1,6 +1,6 @@
 <Version 1.0>
 
-This sample hybrid test automation framework based on:
+Hybrid test automation framework based on:
   - Selenium WebDriver
   - TestNG 
   - Maven 
