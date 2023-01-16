@@ -1,7 +1,7 @@
 package Tests;
 
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
 
 import decorators.Driver;
@@ -29,7 +29,7 @@ public class BaseTest {
 			.toString();
 			 	
 	@Parameters({"browser"})
-	@BeforeTest
+	@BeforeSuite
 	public void testInit(String browser) throws Exception {
 		
 		driver = new DriverLogger(new DriverBase());	
@@ -43,7 +43,7 @@ public class BaseTest {
 		Log.info("Broswer "+browser+" started" +Thread.currentThread().getId());	
 	}
 	
-	@AfterTest
+	@AfterSuite
 	public void testCleanup() {
 		if (driver != null) {
 			driver.quit();

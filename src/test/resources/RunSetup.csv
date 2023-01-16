@@ -1,4 +1,4 @@
-testcaseid,description,ifrunneeded
-tc01,Navigate to home page,true
-tc02,Navigate to user signup page,false
-tc03,Register new user,true
+testid,name,description,execute
+1,navigateToHomepage,Navigate to home page,true
+2,navigateToUserSignupPage,Navigate to user signup page,true
+3,registerNewUser,Register new user,true
