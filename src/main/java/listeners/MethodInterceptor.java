@@ -14,8 +14,13 @@ import globalconstants.GlobalConstants;
 import utilities.filereaders.CsvReaderUtility;
 
 /* 
- * TestNG listener to get the list of tests to run. 
- */
+ * MethodInterceptor implements the IMethodInterceptor listener from TestNG. The intercept method returns
+ * a list of test that should be executed according to the data read from RUN_SETUP_CSV file. 
+ * If columns 'name', 'execute' or 'description' is altered in RunSetup.csv file, it should also be updated 
+ * in getListOfTestCasesToRun method. If the column name in RunSetup.csv file does not match with the names 
+ * used here, it will lead to none of the test cases being run.
+ * 
+ * */ 
 public class MethodInterceptor implements IMethodInterceptor{
 
 	List<IMethodInstance> testList = new ArrayList<>();
