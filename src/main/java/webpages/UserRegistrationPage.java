@@ -1,55 +1,58 @@
 package webpages;
 
-import decorators.Driver;
+import drivermanager.DriverManager;
+import logsetup.Log;
 import webpages.pageelements.UserRegistrationPageElements;
 
-public class UserRegistrationPage extends BasePage{
-		
-	public UserRegistrationPage(Driver driver) {
-		super(driver);
-	}
+public class UserRegistrationPage  {
+
 		
 	//get elements by composition
 	public UserRegistrationPageElements elements() {
-		return new UserRegistrationPageElements(driver);
+		return new UserRegistrationPageElements();
 	}
 	
-	@Override
-	protected void waitForPageLoad() {
-	}
 		
 	public String getPageTitle(){
-		return driver.getPageTitle();
+		Log.info("Getting page title in userregistration page." +Thread.currentThread().getId());		
+		return DriverManager.getDriver().getPageTitle();
 	}
 	
 	public UserRegistrationPage enterFirstname(String firstname) {	
-		driver.findElement(elements().getTxtboxFirstname()).typeText(firstname);
+		DriverManager.getDriver().findElement(elements().getTxtboxFirstname()).typeText(firstname);
+		Log.info("Entered firstname.");		
 		return this;
 	}
 	
 	public UserRegistrationPage enterLastname(String lastname) {	
-		driver.findElement(elements().getTxtboxLastname()).typeText(lastname);
+		DriverManager.getDriver().findElement(elements().getTxtboxLastname()).typeText(lastname);
+		Log.info("Entered last name.");		
 		return this;
 	}
 	
 	public UserRegistrationPage enterEmail(String email) {	
-		driver.findElement(elements().getTxtboxEmail()).typeText(email);
+		DriverManager.getDriver().findElement(elements().getTxtboxEmail()).typeText(email);
+		Log.info("Entered email.");		
+
 		return this;
 	}
 	
 	public UserRegistrationPage enterPassword(String password) {	
-		driver.findElement(elements().getTxtboxPassword()).typeText(password);
+		DriverManager.getDriver().findElement(elements().getTxtboxPassword()).typeText(password);
+		Log.info("Entered password.");		
 		return this;
 	}
 	
 	public UserRegistrationPage confirmPassword(String password) {	
-		driver.findElement(elements().getTxtboxConfirmPassword()).typeText(password);
+		DriverManager.getDriver().findElement(elements().getTxtboxConfirmPassword()).typeText(password);
+		Log.info("confirmed password.");		
 		return this;
 	}
 	
 	public MyAccountPage ClickCreateAnAccountButton() {	
-		driver.findElement(elements().getBtnCreateAnAccount()).click();
-		return new MyAccountPage(driver);
+		DriverManager.getDriver().findElement(elements().getBtnCreateAnAccount()).click();
+		Log.info("Clicked CreateAnAccount Button.");		
+		return new MyAccountPage();
 	}
 	
 	

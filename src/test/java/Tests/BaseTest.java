@@ -1,12 +1,14 @@
 package Tests;
 
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 
+import constants.GlobalConstants;
 import decorators.Driver;
 import decorators.DriverBase;
 import decorators.DriverLogger;
+import drivermanager.DriverManager;
 import logsetup.Log;
 import utilities.filereaders.PropertyFileReader;
 import webpages.HomePage;
@@ -15,7 +17,6 @@ import webpages.UserRegistrationPage;
 import webpages.pagesections.MainMenuSection;
 
 public class BaseTest {
-	
 	public Driver driver;
 	
 	protected MyAccountPage myaccountsPage;
@@ -23,30 +24,33 @@ public class BaseTest {
 	protected HomePage homePage;
 	protected MainMenuSection mainMenuSection;
 	
-	String url = PropertyFileReader
-			.readFile(System.getProperty("user.dir")+"/src/test/resources/Config.properties")
-			.get("url")
-			.toString();
-			 	
+	String url = PropertyFileReader.readFile(GlobalConstants.CONFIGFILE).get("url").toString();
+	 	
 	@Parameters({"browser"})
-	@BeforeSuite
-	public void testInit(String browser) throws Exception {
+	@BeforeMethod
+	public void testInit(String browser) throws Exception { 			
+    	
+		// Setup the driver of type Driver
+		driver = new DriverLogger(new DriverBase());			
 		
-		driver = new DriverLogger(new DriverBase());	
-		Log.info("Driver set up Successfull." +Thread.currentThread().getId());
+		// Add the Driver to Threadlocal from DriverManager
+		DriverManager.setDriver(driver);
+		Log.info("Driver set up Successfull.");
+
+		// Getting the driver from the Threadlocal internal hashmap
+		DriverManager.getDriver().start(browser);
+		Log.info("Browser "+browser+" started.");	
 		
-		homePage=new HomePage(driver);
-		myaccountsPage=new MyAccountPage(driver);
-		userRegistrationPage=new UserRegistrationPage(driver);
-		Log.info("Trying to start browser: "+browser +Thread.currentThread().getId());
-		driver.start(browser);
-		Log.info("Broswer "+browser+" started" +Thread.currentThread().getId());	
-	}
+		homePage=new HomePage();
+		myaccountsPage=new MyAccountPage();
+		userRegistrationPage=new UserRegistrationPage();
+		
+		}
 	
-	@AfterSuite
+	@AfterMethod
 	public void testCleanup() {
-		if (driver != null) {
-			driver.quit();
+		if (DriverManager.getDriver() != null) {
+			DriverManager.removeDriver();
 		}
 		Log.info("Driver quit successfully.");
 

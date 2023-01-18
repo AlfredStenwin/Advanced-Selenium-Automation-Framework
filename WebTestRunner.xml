@@ -1,42 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Demo test suite" >
+<suite name="Demo test suite" parallel="methods" thread-count="3">
 
 	
 	<listeners>
 		<listener class-name="listeners.TestListener" ></listener>
 		<listener class-name="listeners.MethodInterceptor" ></listener>
-
 	</listeners> 
 	
 	<parameter name = "browser" value = "chrome"></parameter> 
-	<test name="Navigate to home page" parallel="tests" thread-count="1">
-
+	<test name="Navigate to home page" thread-count="3">
 		<classes>
 			<class name="Tests.NewUserRegistration"/> 
 		</classes>
 	</test>
-<!--
-	<parameter name = "browser" value = "chrome"></parameter> 
-	<test name="Navigate to user signup page" parallel="tests" thread-count="1">
-			<classes>
-				<class name="Tests.NewUserRegistration"> 
-					<methods>
-					  <include name="navigateToUserSignupPage"></include>
-					</methods>
-				</class>
-			</classes>
-	</test>
 
-	<parameter name = "browser" value = "chrome"></parameter> 
-	<test name="Register new user" parallel="tests" thread-count="1">	
-			<classes>
-				<class name="Tests.NewUserRegistration"> 
-					<methods>
-					  <include name="registerNewUser"></include>
-					</methods>
-				</class>
-			</classes>
-	</test>
-	-->
 </suite> 

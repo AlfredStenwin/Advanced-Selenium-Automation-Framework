@@ -10,8 +10,8 @@ import org.testng.IMethodInstance;
 import org.testng.IMethodInterceptor;
 import org.testng.ITestContext;
 
+import constants.GlobalConstants;
 import enums.TestCaseDetails;
-import globalconstants.GlobalConstants;
 import utilities.filereaders.CsvReaderUtility;
 
 /* 

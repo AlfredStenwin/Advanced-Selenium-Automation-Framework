@@ -2,15 +2,8 @@ package webpages.pageelements;
 
 import org.openqa.selenium.By;
 
-import decorators.Driver;
+public class UserRegistrationPageElements {	
 
-public class UserRegistrationPageElements {
-	Driver driver;
-	
-	public UserRegistrationPageElements(Driver driver) {
-		this.driver=driver;
-	}
-	
 	private final By txtboxFirstname = By.id("firstname");
 	private final By txtboxLastname = By.id("lastname");
 	private final By txtboxEmail = By.id("email_address");
