@@ -1,25 +1,20 @@
 package webpages;
 
-import decorators.Driver;
+import drivermanager.DriverManager;
+import logsetup.Log;
 import webpages.pageelements.MyaccountPageElements;
 
-public class MyAccountPage extends BasePage{
-		
-	public MyAccountPage(Driver driver) {
-		super(driver);
-	}
+public class MyAccountPage {
 		
 	public MyaccountPageElements elements() {
-		return new MyaccountPageElements(driver);
+		return new MyaccountPageElements();
 	}
 		
-	@Override
-	protected void waitForPageLoad( ) {
-	}
 	
 	//Methods
 	public String GetPageTitle(){
-		return driver.getPageTitle();
+		Log.info("Getting page title in Myaccounts page.");		
+		return DriverManager.getDriver().getPageTitle();
 	}
 	
 

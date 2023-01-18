@@ -66,18 +66,19 @@ public class TestListener implements ITestListener, ISuiteListener{
 		
 		//Getting the driver from result parameter for taking the screenshot on failure of test
 		try {
+			result.getTestClass().getRealClass().getFields();
 			Driver driver = (Driver)result.getTestClass().getRealClass().getField("driver").get(result.getInstance());
 			
 			//Take screenshot and copying to Screenshot folder in the project
-			String screenshotsFolderPath =System.getProperty("user.dir")+"/Screenshots/"+testDesc+".png";
+			//String screenshotsFolderPath =System.getProperty("user.dir")+"/Screenshots/"+testDesc+".png";
 			
 			//Call takescreenshot() method from DriverLogger class and copying the screenshot from source path to Screenshot folder 	
-			FileHandler.copy(driver.takescreenshot(), new File(screenshotsFolderPath));
+			//FileHandler.copy(driver.takescreenshot(), new File(screenshotsFolderPath));
 			
 			//Add screenshot from Screenshot folder to extent report
-			extentTest.addScreenCaptureFromPath(screenshotsFolderPath);
+			//extentTest.addScreenCaptureFromPath(screenshotsFolderPath);
 			
-		} catch (IllegalArgumentException | SecurityException | NoSuchFieldException | IllegalAccessException | IOException e) {
+		} catch (IllegalArgumentException | SecurityException | NoSuchFieldException | IllegalAccessException e) {
 			e.printStackTrace();
 		}
 		

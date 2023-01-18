@@ -13,31 +13,27 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import driverfactory.DriverFactory;
+import browserfactory.BrowserFactory;
 
 public class DriverBase implements Driver {
     private WebDriver driver;
     private WebDriverWait wait;
-    
-	protected static ThreadLocal<WebDriver> threadLocaldriver = new ThreadLocal<>();
- 
-    public void start(String browser) {
-    	driver = DriverFactory.getDriverManager(browser).initDriver();
+     
+    public void start(String browser) { 
+    	driver = BrowserFactory.getDriverManager(browser).initDriver();
     	wait = new WebDriverWait(driver, 60);
-    	threadLocaldriver.set(driver);
     }
 
     public void quit() {
-        threadLocaldriver.get().quit();
-        threadLocaldriver.remove();
+        driver.quit();
     }
 
     public void goToUrl(String url) {
-    	threadLocaldriver.get().get(url);
+    	driver.get(url);
     }
 
 	public String getPageTitle() {  	
-    	return threadLocaldriver.get().getTitle();
+    	return driver.getTitle();
 	}
     
     public Element findElement(By locator) {
@@ -63,12 +59,12 @@ public class DriverBase implements Driver {
     }
     
     public void waitForAjax() {
-        JavascriptExecutor javascriptExecutor = (JavascriptExecutor) threadLocaldriver.get();
+        JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
         wait.until(d -> (Boolean) javascriptExecutor.executeScript("return window.jQuery != undefined && jQuery.active == 0"));
     }
     
     public void waitUntilPageLoadsCompletely() {
-        JavascriptExecutor javascriptExecutor = (JavascriptExecutor) threadLocaldriver.get();
+        JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
         wait.until(d -> javascriptExecutor.executeScript("return document.readyState").toString().equals("complete"));
     }
 

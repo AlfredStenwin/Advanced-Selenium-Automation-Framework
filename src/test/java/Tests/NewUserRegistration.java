@@ -6,20 +6,17 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import decorators.Driver;
 import logsetup.Log;
 import utilities.filereaders.JsonFileReader;
 
 public class NewUserRegistration extends BaseTest{	
-	Driver driver;
-
 		
 	@Test
 	public void navigateToHomepage() {
 		String pageTitle = "Home Page - Magento eCommerce - website to practice selenium | demo website for automation testing | selenium practice sites | selenium demo sites | best website to practice selenium automation | automation practice sites Magento Commerce - website to practice selenium | demo website for automation testing | selenium practice sites";
 		String title = homePage.gotoUrl(url).getPageTitle();
 		Assert.assertEquals(title , pageTitle);
-		Log.info("Completed test for Navigate to home page");
+		Log.info("Completed test for Navigate to home page.");
 	}	
 	
 	@Test
@@ -28,7 +25,7 @@ public class NewUserRegistration extends BaseTest{
 		homePage.gotoUrl(url).clickOnSignUpTab().getPageTitle();			
 		String title = userRegistrationPage.getPageTitle();
 		Assert.assertEquals(title, pageTitle);	
-		Log.info("Completed test for Navigate to user signup page");
+		Log.info("Completed test for Navigate to user signup page.");
 	}
 	
 	@Test( dataProvider = "dataProvider1" )
@@ -44,8 +41,8 @@ public class NewUserRegistration extends BaseTest{
 		.ClickCreateAnAccountButton();	
 		
 		String pageTitle = myaccountsPage.GetPageTitle();
-		Assert.assertEquals(pageTitle, title);	
-		Log.info("Completed test for Register new user");
+		Assert.assertEquals(pageTitle, title);	// Expected to fail now as the page wont be displayed 
+		Log.info("Completed test for Register new user.");
 	}
 	
 
