@@ -10,7 +10,7 @@ import decorators.DriverBase;
 import decorators.DriverLogger;
 import drivermanager.DriverManager;
 import logsetup.Log;
-import utilities.filereaders.PropertyFileReader;
+import utilities.PropertyFileReader;
 import webpages.HomePage;
 import webpages.MyAccountPage;
 import webpages.UserRegistrationPage;

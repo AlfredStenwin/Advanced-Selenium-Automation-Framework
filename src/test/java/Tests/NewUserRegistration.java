@@ -7,7 +7,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import logsetup.Log;
-import utilities.filereaders.JsonFileReader;
+import utilities.JsonFileReader;
 
 public class NewUserRegistration extends BaseTest{	
 		
