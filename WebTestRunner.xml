@@ -8,6 +8,7 @@
 		<listener class-name="listeners.MethodInterceptor" ></listener>
 	</listeners> 
 	
+	<!-- Browser takes two values 'edge' and 'chrome'-->
 	<parameter name = "browser" value = "chrome"></parameter> 
 	<test name="Navigate to home page" thread-count="3">
 		<classes>

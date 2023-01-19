@@ -12,7 +12,7 @@ import org.testng.ITestContext;
 
 import constants.GlobalConstants;
 import enums.TestCaseDetails;
-import utilities.filereaders.CsvReaderUtility;
+import utilities.CsvReaderUtility;
 
 /* 
  * MethodInterceptor implements the IMethodInterceptor listener from TestNG. The intercept method returns
