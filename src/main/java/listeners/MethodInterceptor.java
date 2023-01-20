@@ -34,7 +34,7 @@ public class MethodInterceptor implements IMethodInterceptor{
 		List<Map<String, String>> mapList = new ArrayList<>();		
 		
 		try {
-			mapList.addAll(CsvReaderUtility.read(new File(GlobalConstants.RUN_SETUP_CSV)));
+			mapList.addAll(CsvReaderUtility.read(new File(GlobalConstants.RUNSETUP)));
 			testList=getListOfTestCasesToRun(methods, mapList);
 			
 		} catch (IOException e) {

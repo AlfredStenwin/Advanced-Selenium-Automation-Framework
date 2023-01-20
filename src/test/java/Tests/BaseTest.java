@@ -24,7 +24,7 @@ public class BaseTest {
 	protected HomePage homePage;
 	protected MainMenuSection mainMenuSection;
 	
-	String url = PropertyFileReader.readFile(GlobalConstants.CONFIGFILE).get("url").toString();
+	String url = PropertyFileReader.readFile(GlobalConstants.CONFIG).get("url").toString();
 	 	
 	@Parameters({"browser"})
 	@BeforeMethod
@@ -33,7 +33,7 @@ public class BaseTest {
 		// Setup the driver of type Driver
 		driver = new DriverLogger(new DriverBase());			
 		
-		// Add the Driver to Threadlocal from DriverManager
+		// Add the Driver to Threadlocalmap from DriverManager
 		DriverManager.setDriver(driver);
 		Log.info("Driver set up Successfull.");
 
