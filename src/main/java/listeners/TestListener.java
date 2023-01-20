@@ -4,7 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.io.FileHandler;
 import org.testng.ISuite;
 import org.testng.ISuiteListener;
@@ -16,6 +19,7 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 
+import constants.GlobalConstants;
 import decorators.Driver;
 import logsetup.Log;
 import reports.ExtentReport;
@@ -70,15 +74,16 @@ public class TestListener implements ITestListener, ISuiteListener{
 			Driver driver = (Driver)result.getTestClass().getRealClass().getField("driver").get(result.getInstance());
 			
 			//Take screenshot and copying to Screenshot folder in the project
-			String screenshotsFolderPath =System.getProperty("user.dir")+"/Screenshots/"+testDesc+".png";
+			String screenshotsFolderPath =GlobalConstants.SCREENSHOT_FOLDER + testDesc + ".png";
 			
 			//Call takescreenshot() method from DriverLogger class and copying the screenshot from source path to Screenshot folder 	
-			//FileHandler.copy(ScreenshotUtility.takescreenshot(driver), new File(screenshotsFolderPath));
+			//FileHandler.copy(((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE),
+			//		new File(screenshotsFolderPath));
 			
 			//Add screenshot from Screenshot folder to extent report
 			//extentTest.addScreenCaptureFromPath(screenshotsFolderPath);
 			
-		} catch (IllegalArgumentException | SecurityException | NoSuchFieldException | IllegalAccessException  e) {
+		} catch (IllegalArgumentException | SecurityException | NoSuchFieldException | IllegalAccessException | WebDriverException  e) {
 			e.printStackTrace();
 		}
 		
