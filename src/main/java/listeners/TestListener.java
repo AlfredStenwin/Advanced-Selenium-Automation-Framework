@@ -21,6 +21,7 @@ import com.aventstack.extentreports.Status;
 
 import constants.GlobalConstants;
 import decorators.Driver;
+import drivermanager.DriverManager;
 import logsetup.Log;
 import reports.ExtentReport;
 import utilities.ScreenshotUtility;
@@ -68,22 +69,17 @@ public class TestListener implements ITestListener, ISuiteListener{
 	@Override
 	public void onTestFailure(ITestResult result) {
 		String testDesc=result.getMethod().getDescription();
-		
-		//Getting the driver from result parameter for taking the screenshot on failure of test
-		try {
-			Driver driver = (Driver)result.getTestClass().getRealClass().getField("driver").get(result.getInstance());
-			
+		try {						
 			//Take screenshot and copying to Screenshot folder in the project
 			String screenshotsFolderPath =GlobalConstants.SCREENSHOT_FOLDER + testDesc + ".png";
 			
-			//Call takescreenshot() method from DriverLogger class and copying the screenshot from source path to Screenshot folder 	
-			//FileHandler.copy(((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE),
-			//		new File(screenshotsFolderPath));
-			
+			//Call takescreenshot() method from DriverLogger class and copying the screenshot from source path to Screenshot folder 				
+			FileHandler.copy(ScreenshotUtility.getscreenshot(),new File(screenshotsFolderPath));
+		
 			//Add screenshot from Screenshot folder to extent report
-			//extentTest.addScreenCaptureFromPath(screenshotsFolderPath);
+			extentTest.addScreenCaptureFromPath(screenshotsFolderPath);
 			
-		} catch (IllegalArgumentException | SecurityException | NoSuchFieldException | IllegalAccessException | WebDriverException  e) {
+		} catch (IllegalArgumentException | SecurityException | WebDriverException | IOException  e) {
 			e.printStackTrace();
 		}
 		
