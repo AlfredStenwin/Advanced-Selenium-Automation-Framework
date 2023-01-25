@@ -24,6 +24,7 @@ import decorators.Driver;
 import drivermanager.DriverManager;
 import logsetup.Log;
 import reports.ExtentReport;
+import reports.ReportManager;
 import utilities.ScreenshotUtility;
 
 public class TestListener implements ITestListener, ISuiteListener{
@@ -53,7 +54,8 @@ public class TestListener implements ITestListener, ISuiteListener{
 	public void onTestStart(ITestResult result) {
 		String testDesc=result.getMethod().getDescription();
 		extentTest = extentReport.createTest(testDesc);
-		extentTest.log(Status.INFO, testDesc+" started." );
+		ReportManager.setExtentTest(extentTest);
+		ReportManager.getExtentTest().log(Status.INFO, testDesc+" started." );
 		Log.info("\""+testDesc+"\" execution started. EntentTest created");
 
 	}
@@ -61,7 +63,8 @@ public class TestListener implements ITestListener, ISuiteListener{
 	@Override
 	public void onTestSuccess(ITestResult result) {
 		String testDesc=result.getMethod().getDescription();
-		extentTest.log(Status.PASS, testDesc+" test passed." );
+		ReportManager.getExtentTest().log(Status.PASS, testDesc+" test passed." );
+		ReportManager.removeExtentTest();
 		Log.info("\""+testDesc+"\" passed.");		
 		
 	}
@@ -77,22 +80,24 @@ public class TestListener implements ITestListener, ISuiteListener{
 			FileHandler.copy(ScreenshotUtility.getscreenshot(),new File(screenshotsFolderPath));
 		
 			//Add screenshot from Screenshot folder to extent report
-			extentTest.addScreenCaptureFromPath(screenshotsFolderPath);
+			ReportManager.getExtentTest().addScreenCaptureFromPath(screenshotsFolderPath);
 			
 		} catch (IllegalArgumentException | SecurityException | WebDriverException | IOException  e) {
 			e.printStackTrace();
 		}
 		
-		extentTest.log(Status.FAIL, testDesc +" failed.");
-		extentTest.fail(Arrays.toString(result.getThrowable().getStackTrace()));//beautify stacktrace		
+		ReportManager.getExtentTest().log(Status.FAIL, testDesc +" failed.");
+		ReportManager.getExtentTest().fail(Arrays.toString(result.getThrowable().getStackTrace()));//beautify stacktrace		
+		ReportManager.removeExtentTest();
 		Log.error("\""+result.getName()+"\" failed.", result.getThrowable());
 	}
 
 	@Override
 	public void onTestSkipped(ITestResult result) {
 		String testName=result.getName();
-		extentTest.log(Status.SKIP, testName +" skipped.");		
-		extentTest.skip(Arrays.toString(result.getThrowable().getStackTrace()));		
+		ReportManager.getExtentTest().log(Status.SKIP, testName +" skipped.");		
+		ReportManager.getExtentTest().skip(Arrays.toString(result.getThrowable().getStackTrace()));		
+		ReportManager.removeExtentTest();
 		Log.error("\""+result.getName()+"\" skipped.", result.getThrowable());		
 	}
 
