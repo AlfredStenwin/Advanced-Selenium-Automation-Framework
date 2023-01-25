@@ -1,24 +1,17 @@
-/**
- * 
- */
 package utilities;
 
 import java.io.File;
 
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import decorators.Driver;
 import drivermanager.DriverManager;
 
 /**
  * @author Alfred Sunny
  * 
  */
-public class ScreenshotUtility {
+public final class ScreenshotUtility {
 	
-	//Method to get the screenshots
-	public static File takescreenshot(Driver driver) {
-		
-		return ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+	//Method to get the screenshots. Instance of the threadlocal is used to prevent the thread related issue
+	public static File getscreenshot() {	
+		return DriverManager.getDriver().takescreenshot();
 	}
 }
