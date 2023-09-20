@@ -18,7 +18,9 @@ Following patterns are followed in this framework (some of which shall be altere
  
 RunSetup.csv file is present in the 'src/test/resources' folder which can be used to configure which test cases to run for each execution cycle by marking 'true' against the test case name in the csv file. While adding new test cases to this file, please note that the test case name in the csv should be the same as the method name of the test in test class file. Parallel execution is also possible by executing the WebTesRunner.xml file with the required thread count as done normally in testNG (Will be moving this to config file to make it easier at the time of execution in subsequent iterations). Only 3 sample tests are added now to give an idea of how to write the test cases but there are plans to add more test cases to give the users a better idea of the framework. 
 
-Jackson library is used for reading the csv and json files. The utility classes for reading json files can read only simple json at present and is used to read the test data. But I am planning to upgrade it in near future as Rest assured capability will be added to the framework.
-  
+Jackson library is used for reading the csv and json files. The utility classes for reading json files can read only simple json at present and is used to read the test data. But I am planning to upgrade it in near future as Rest assured will be added to the framework for API testing.
+
+Also for easier reporting of the bugs, I will add utility to create bug tickets on JIRA for the failed test scrips. 
+
 Framework can be easily extended to use Appium for Android / iOS or Windows based apps using WinAppDirver by adding the respective drivers and capabilities in the driver factory ( Will be adding a layer to seperate the dirver configuration for web projects and mobile/native windows product in future). Also, add the dependencies in the pom.xml file
 
