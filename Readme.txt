@@ -8,7 +8,7 @@ Hybrid test automation framework based on:
   - Log4j2 
   - Jackson library
   
-This is a hybrid framework which is still under development.  New features are being added to the framework according to the priority or requests. Users can clone and change the framework according to their respective requirements. My intent in designing this framework is to make it easy to setup and start quickly with selenium. But at the same time, I have tried to make it extendable, readable and maintainable.  
+With this framework, automation engineers can get started quickly on automating their tests rather than wasting time on designing and maintaining the framework. New features are being added to the framework constantky. My intent in designing this framework is to make it easy to setup and start quickly with selenium. But at the same time, I have tried to make it extendable, readable and maintainable.  Users can clone and adapt the framework according to their respective requirements if needed.
 
 Following patterns are followed in this framework (some of which shall be altered according to the usability)
   - Page Object Model is followed which is golden rule for test automation. Page Factory is not used in finding the elements but the page elements are segregated to separate       classes and used the respective page classes by means of composition rather than inheritance. 
