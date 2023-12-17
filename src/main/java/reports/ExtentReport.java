@@ -33,7 +33,7 @@ public final class ExtentReport {
 	public static ExtentReports initReport() {	
 		Properties extentReportConfig = PropertyFileReader.readFile(GlobalConstants.EXTENTREPORT_CONFIG);
 		String theme = extentReportConfig.get(ConfigParameters.THEME.name()).toString();
-		String reportName = extentReportConfig.get(ConfigParameters.REPORT_NAME.name()).toString();
+		String fileName = extentReportConfig.get(ConfigParameters.REPORT_NAME.name()).toString();
 		String documentTitle = extentReportConfig.get(ConfigParameters.DOCUMENT_TITLE.name()).toString();
 		String timeStampFormat = extentReportConfig.get(ConfigParameters.TIMESTAMP_FORMAT.name()).toString();
 	
@@ -58,7 +58,7 @@ public final class ExtentReport {
 	    	  	break;
 		    }
 
-			extentSparkReporter.config().setReportName(reportName);
+			extentSparkReporter.config().setReportName(fileName);
 			extentSparkReporter.config().setDocumentTitle(documentTitle);
 			extentSparkReporter.config().setTimeStampFormat(timeStampFormat);	
 			
@@ -76,6 +76,9 @@ public final class ExtentReport {
 	public static void flushReport() {
 		if(Objects.nonNull(extentReport)) {
 			extentReport.flush();
+			
+			//to open the report in the default browser after flushing
+			//Desktop.getDesktop().browse(new File(fileName).toURI());
 		}
 	}
 }
