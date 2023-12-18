@@ -56,7 +56,7 @@ public class TestListener implements ITestListener, ISuiteListener{
 		extentTest = extentReport.createTest(testDesc);
 		ReportManager.setExtentTest(extentTest);
 		ReportManager.getExtentTest().log(Status.INFO, testDesc+" started." );
-		Log.info("\""+testDesc+"\" execution started. EntentTest created");
+		Log.info("\""+testDesc+"\" test execution started.");
 
 	}
 
@@ -74,7 +74,7 @@ public class TestListener implements ITestListener, ISuiteListener{
 		String testDesc=result.getMethod().getDescription();
 		try {						
 			//Take screenshot and copying to Screenshot folder in the project
-			String screenshotsFolderPath =GlobalConstants.SCREENSHOT_FOLDER + testDesc + ".png";
+			String screenshotsFolderPath = GlobalConstants.SCREENSHOT_FOLDER + testDesc + ".png";
 			
 			//Call takescreenshot() method from DriverLogger class and copying the screenshot from source path to Screenshot folder 				
 			FileHandler.copy(ScreenshotUtility.getscreenshot(),new File(screenshotsFolderPath));

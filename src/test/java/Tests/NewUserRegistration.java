@@ -13,24 +13,24 @@ public class NewUserRegistration extends BaseTest{
 		
 	@Test
 	public void navigateToHomepage() {
-		String pageTitle = "Home Page - Magento eCommerce - website to practice selenium | demo website for automation testing | selenium practice sites | selenium demo sites | best website to practice selenium automation | automation practice sites Magento Commerce - website to practice selenium | demo website for automation testing | selenium practice sites";
-		String title = homePage.gotoUrl(url).getPageTitle();
-		Assert.assertEquals(title , pageTitle);
+		String expectedTitle = "Home Page";
+		String actualtitle = homePage.gotoUrl(url).getPageTitle();
+		Assert.assertEquals(actualtitle , expectedTitle);
 		Log.info("Completed test for Navigate to home page.");
 	}	
 	
 	@Test
 	public void navigateToUserSignupPage() {
-		String pageTitle = "Create New Customer Account Magento Commerce - website to practice selenium | demo website for automation testing | selenium practice sites";						
+		String expectedTitle = "Create New Customer Account";						
 		homePage.gotoUrl(url).clickOnSignUpTab().getPageTitle();			
-		String title = userRegistrationPage.getPageTitle();
-		Assert.assertEquals(title, pageTitle);	
+		String actualtitle = userRegistrationPage.getPageTitle();
+		Assert.assertEquals(actualtitle, expectedTitle);	
 		Log.info("Completed test for Navigate to user signup page.");
 	}
 	
 	@Test( dataProvider = "dataProvider1" )
 	public void registerNewUser(Map<String, Object> map) {
-		String title = "My Account Magento Commerce - website to practice selenium | demo website for automation testing | selenium practice sites";		
+		String expectedTitle = "My Account";		
 		homePage.gotoUrl(url)
 		.clickOnSignUpTab()
 		.enterFirstname(map.get("firstname").toString())
@@ -40,8 +40,8 @@ public class NewUserRegistration extends BaseTest{
 		.confirmPassword(map.get("password").toString())
 		.ClickCreateAnAccountButton();	
 		
-		String pageTitle = myaccountsPage.GetPageTitle();
-		Assert.assertEquals(pageTitle, title);	// Expected to fail now as the page wont be displayed 
+		String actualTitle = myaccountsPage.GetPageTitle();
+		Assert.assertEquals(actualTitle, expectedTitle);	// Expected to fail now as the page wont be displayed 
 		Log.info("Completed test for Register new user.");
 	}
 	

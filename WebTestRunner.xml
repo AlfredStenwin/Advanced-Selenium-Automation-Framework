@@ -9,7 +9,7 @@
 	</listeners> 
 	
 	<!-- Browser takes two values 'edge' and 'chrome'-->
-	<parameter name = "browser" value = "chrome"></parameter> 
+	<parameter name = "browser" value = "edge"></parameter> 
 	<test name="Navigate to home page" thread-count="3">
 		<classes>
 			<class name="Tests.NewUserRegistration"/> 
