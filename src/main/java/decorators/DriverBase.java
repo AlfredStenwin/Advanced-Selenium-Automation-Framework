@@ -37,7 +37,7 @@ public class DriverBase implements Driver {
 	}
     
     public Element findElement(By locator) {
-        var nativeWebElement = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+        WebElement nativeWebElement = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
         Element element = new ElementBase(nativeWebElement, locator );
         // use decorated element
         Element logElement = new ElementLogger(element);
@@ -48,7 +48,7 @@ public class DriverBase implements Driver {
     public List<Element> findElements(By locator) {
         List<WebElement> nativeWebElements =
                 wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
-        var elements = new ArrayList<Element>();
+        ArrayList<Element> elements = new ArrayList<Element>();
         for (WebElement nativeWebElement:nativeWebElements) {
             Element element = new ElementBase(nativeWebElement, locator);
             Element logElement = new ElementLogger(element);
