@@ -20,7 +20,7 @@ RunSetup.csv file is present in the 'src/test/resources' folder which can be use
 
 Jackson library is used for reading the csv and json files. The utility classes for reading json files can read only simple json at present and is used to read the test data. But I am planning to upgrade it in near future as Rest assured will be added to the framework for API testing.
 
-Also for easier reporting of the bugs, utility to create bug tickets on JIRA for the failed test scrips will be added to th eramework in future. 
+Also for easier reporting of the bugs, utility to create bug tickets on JIRA for the failed test scrips will be added to th framework in future. 
 
-Framework can be easily extended to use Appium for Android / iOS or Windows based apps using WinAppDirver by adding the respective drivers and capabilities in the driver factory ( Will be adding a layer to seperate the dirver configuration for web projects and mobile/native windows product in future). Also, add the dependencies in the pom.xml file
+Framework can be easily extended to use Appium for Android / iOS or Windows based apps using WinAppDriver by adding the respective drivers and capabilities in the driver factory ( Will be adding a layer to seperate the dirver configuration for web projects and mobile/native windows product in future). Also, add the dependencies in the pom.xml file
 
